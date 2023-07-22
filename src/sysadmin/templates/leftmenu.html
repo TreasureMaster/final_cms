@@ -1,0 +1,184 @@
+{% load i18n %}
+{% load crispy_forms_tags static %}
+<div id="side-menu" class="col-sm-3 d-none d-sm-block">
+    <div class="leftside-block">
+      <div class="profile-block">
+        {% if user.profile.photo %}
+          <img src="{{ user.profile.photo.url }}" alt="photo thumbnail" class="rounded-circle">
+        {% else %}
+          <img src="{% static 'site/images/no-user-image.gif' %}" alt="no image" class="rounded-circle">
+        {% endif %}
+        <h4 class="profile-title">
+          {% if user.is_authenticated %}{{ user.username }}{% else %}{% trans "Anonymous User" %}{% endif %}
+          <small>{% if user.is_authenticated %}{{ user.email }}{% endif %}</small>
+        </h4>
+      </div>
+
+      <ul class="nav nav-pills flex-column">
+
+        {% comment %}
+        <li class="nav-item">
+          <a href="#" class="nav-link transition">
+            <span class="fa fa-home fa-fw" aria-hidden="true"></span>
+            {% trans "Overview" %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link transition">
+            <span class="fa fa-gift fa-fw" aria-hidden="true"></span>
+            {% trans "Store" %}
+          </a>
+        </li>
+        {% endcomment %}
+        <li class="nav-item">
+          <a href="#finances-opts" class="nav-link transition" role="button"
+              data-toggle="collapse" aria-expanded="false" aria-controls="finances-opts">
+            <span class="fa fa-home fa-fw" aria-hidden="true"></span>
+            {% trans "Панель управления" %}
+            <span class="fa fa-chevron-right transition pull-right" aria-hidden="true"></span>
+          </a>
+          <ul class="collapse list-unstyled" id="finances-opts">
+            <li>
+              {#<a href="{% url 'lots:lots_list' %}" class="transition">{% trans "Current auctions" %}</a>#}
+              <a href="{% url 'core:index' %}" class="transition">{% trans "Обратная связь" %}</a>
+            </li>
+            <li>
+              <a href="#" class="transition">{% trans "Панель мониторинга" %}</a>
+            </li>
+          </ul>
+        </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a href="#items-opts" class="nav-link transition" role="button"
+              data-toggle="collapse" aria-expanded="false" aria-controls="items-opts">
+            <span class="fa fa-money fa-fw" aria-hidden="true"></span>
+            {% trans "Seller dashboard" %}
+            <span class="fa fa-chevron-right transition pull-right" aria-hidden="true"></span>
+          </a>
+          <ul class="collapse list-unstyled" id="items-opts">
+            <li>
+              {#<a href="{% url 'items:items_list' %}" class="transition">{% trans "View items list" %}</a>#}
+              <a href="#" class="transition">{% trans "View items list" %}</a>
+            </li>
+            {#<li>
+              <a href="{% url 'items:item_create' %}" class="transition">{% trans "Create new item" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:seller_sold_lot_list' %}" class="transition">{% trans "Lots sold" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:seller_paid_lot_list' %}" class="transition">{% trans "Lots paid" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:seller_sent_lot_list' %}" class="transition">{% trans "Dispatch status" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:seller_completed_lot_list' %}" class="transition">{% trans "Completed orders" %}</a>
+            </li>#}
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#customer-opts" class="nav-link transition" role="button"
+              data-toggle="collapse" aria-expanded="false" aria-controls="customer-opts">
+            <span class="fa fa-shopping-cart fa-fw" aria-hidden="true"></span>
+            {% trans "Customer dashboard" %}
+            <span class="fa fa-chevron-right transition pull-right" aria-hidden="true"></span>
+          </a>
+          <ul id="customer-opts" class="collapse list-unstyled">
+            <li>
+              {#<a href="{% url 'lots:customer_current_lot_list' %}" class="transition">{% trans "Current lots" %}</a>#}
+              <a href="#" class="transition">{% trans "Current lots" %}</a>
+            </li>
+            {#<li>
+              <a href="{% url 'lots:customer_ends_lot_list' %}" class="transition">{% trans "Bids history" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:customer_wins_lot_list' %}" class="transition">{% trans "Win history" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:customer_paid_lot_list' %}" class="transition">{% trans "Paid lots" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:customer_sent_lot_list' %}" class="transition">{% trans "Dispatch status" %}</a>
+            </li>
+            <li>
+              <a href="{% url 'lots:customer_received_lot_list' %}" class="transition">{% trans "Completed orders" %}</a>
+            </li>#}
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#profile-opts" class="nav-link transition" role="button"
+              data-toggle="collapse" aria-expanded="false" aria-controls="profile-opts">
+            <span class="fa fa-user fa-fw" aria-hidden="true"></span>
+            {% trans "Profile" %}
+            <span class="fa fa-chevron-right transition pull-right" aria-hidden="true"></span>
+          </a>
+          <ul class="collapse list-unstyled" id="profile-opts">
+            <li>
+              {#<a href="{% url 'customprofile:owner' %}" class="transition">{% trans "View profile" %}</a>#}
+              <a href="#" class="transition">{% trans "View profile" %}</a>
+            </li>
+            {#<li>
+              <a href="{% url 'customprofile:addresses_list' %}" class="transition">{% trans "Addresses" %}</a>
+            </li>#}
+          </ul>
+        </li>
+
+        {% comment %}
+        <li class="nav-item">
+          <a href="#" class="nav-link transition">
+            <span class="fa fa-clock-o fa-flip-horizontal fa-fw" aria-hidden="true"></span>
+            {% trans "My current bids" %}
+            <span class="badge badge-pill badge-success pull-right">12</span>
+          </a>
+        </li>
+        {% endcomment %}
+        {% endif %}
+
+        <li class="dropdown-divider"></li>
+
+        {% if user.is_authenticated %}
+
+        <li class="nav-item">
+          {#<a href="{% url 'logout' %}" class="nav-link transition">#}
+          <a href="#" class="nav-link transition">
+            <span class="fa fa-sign-out fa-fw" aria-hidden="true"></span>
+            {% trans "Logout" %}
+          </a>
+        </li>
+
+        {% if is_filtered %}
+        <li class="dropdown-divider"></li>
+
+        <li class="nav-item">
+          <a href="#filtered-opts" class="nav-link transition" role="button"
+              data-toggle="collapse" aria-expanded="false" aria-controls="filtered-opts">
+            <span class="fa fa-list fa-fw" aria-hidden="true"></span>
+            {% trans "Filters" %}
+            <span class="fa fa-chevron-right transition pull-right" aria-hidden="true"></span>
+          </a>
+          <ul id="filtered-opts" class="collapse list-unstyled ml-3">
+            <li>
+              {% crispy form %}
+            </li>
+          </ul>
+        </li>
+
+        {% endif %}
+
+        {% else %}
+        <li class="nav-item">
+          {#<a href="{% url 'login' %}" class="nav-link transition">#}
+          <a href="#" class="nav-link transition">
+            <span class="fa fa-sign-in fa-fw" aria-hidden="true"></span>
+            {% trans "Login or register" %}
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+
+    </div>
+  </div>

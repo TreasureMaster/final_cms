@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./auction-project/config/nginx:/etc/nginx/conf.d
+      - static_volume:/home/auction/static
+      - media_volume:/home/auction/media
+    depends_on:
+      - web
+    networks:
+      - auction-network
+
+  web:
+    build:
+      context: .
+      args:
+        PIP_REQUIREMENTS: ${PIP_REQUIREMENTS}
+        WORK_DIR: ${WORK_DIR}
+    command: bash -c "commands/web_start.sh"
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - static_volume:/home/auction/static
+      - media_volume:/home/auction/media
+    expose:
+      - 8000
+    env_file:
+      - env/.env_django
+      - env/.env_db
+      - env/.env_superuser
+    environment:
+      - WORK_DIR=${WORK_DIR}
+    networks:
+      - auction-network
+
+  db:
+    image: bitnami/postgresql:14
+    restart: always
+    env_file:
+      - env/.env_db
+    ports:
+      - 5432
+    volumes:
+      # - postgres_data:/var/lib/postgresql/data/
+      - postgres_data:/bitnami/postgresql
+    networks:
+      - auction-network
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+networks:
+  auction-network:

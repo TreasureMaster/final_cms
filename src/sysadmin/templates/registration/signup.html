@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load i18n %} {% load crispy_forms_tags %} {% block title %}{% trans
+"Account register" %}{% endblock title %} {% block content %}
+<div class="col-xl-6">
+  <div class="card">
+    <h4 class="card-header">{% trans "Register" %}</h4>
+    <div class="card-body">
+      <h5 class="card-title">{% trans "Account register" %}</h5>
+      {% include 'misc/includes/error_messages.html' %} {% crispy form %}
+      <p class="card-text mt-3"></p>
+      <p class="card-text mt-3">
+        {% trans "You can return to the login page" %}:
+        <a href="{% url 'login' %}" class="card-link text-primary font-weight-bold">
+          {% trans "sign in" %}
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% load static i18n %}
+{% load crispy_forms_tags %}
+
+<div class="col-xl-12">
+    <div class="card">
+      <h4 class="card-header">Главная страница сайта</h4>
+      <div class="card-body text-center">
+        <img class="card-img-top w-50 mx-auto mt-3" src="{% static 'site/images/1111.jpg' %}">
+      </div>
+      <div class="card-body">
+        <p class="card-text">
+          Это сервис заказчика + SSL, создающий страницу с любой нейтральной картинкой + формой обратной связи.
+        </p>
+        <p class="card-text">
+          Внимание! Регистрация и авторизация на сервисе заказчика отключена (не требуется по ТЗ).
+        </p>
+        <h5 class="card-title">Отправка обратной связи</h5>
+        {% if messages %}
+        <ul class="list-group mb-3">
+          {% for message in messages %}
+          <!-- <div class="alert alert-{{ message.tags }} w-50" role="alert"> -->
+              <li class="list-group-item list-group-item-{{ message.tags }} w-50 font-weight-bold">{{ message }}</li>
+          <!-- </div> -->
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% crispy form %}
+      </div>
+    </div>
+  </div>

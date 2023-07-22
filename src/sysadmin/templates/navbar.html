@@ -1,0 +1,95 @@
+{% load i18n %}
+{% load static %}
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+    <div class="col-sm-3 top-left-menu d-flex">
+
+        <a href="#" class="navbar-brand"><h1>{% trans "Sysadmin SF admin-1024" %}</h1></a>
+
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-menu"
+                aria-controls="nav-menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+      <a href="#" class="header-refresh ml-auto btn btn-link" role="button"
+          data-toggle="tooltip" data-placement="bottom" data-delay="500" title="Refresh data">
+        <span class="fa fa-repeat"></span>
+      </a>
+    </div>
+
+    <form id="search" class="col-sm-3 d-none d-sm-block" role="search">
+      <div class="input-group transition">
+        <div class="input-group-prepend">
+          <span class="fa fa-search input-group-text d-flex" aria-hidden="true" id="search-addon1"></span>
+        </div>
+        <input type="text" class="form-control transition" placeholder="Search..." id="input-search"
+                aria-label="Search" aria-describedby="search-addon1">
+      </div>
+    </form>
+
+    <div id="nav-menu" class="collapse navbar-collapse justify-content-end">
+
+      <!-- Здесь были notifications -->
+
+      <!-- Кнопка выбора языка -->
+      <div id="nav-language" class="btn-group">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        <button type="button" class="btn btn-link dropdown-toggle caret-off"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {# {{ LANGUAGE_CODE|upper }} #}
+          {# TODO сделать проверку существования изображения флага #}
+          <img src="{% static 'site/images/flags/' %}{{ LANGUAGE_CODE }}_flag.png" alt="{% trans 'flag image' %}" class="img-thumbnail rounded-circle">
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-right">
+          {% for language in languages %}
+            <li>
+              {#<a href="/{{ language.code }}/{{request.get_full_path|slice:'4:'}}" class="transition">#}
+              <a href="#" class="transition">
+                {{ language.name_local|capfirst }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <!-- Круглая кнопка профиля -->
+      <div id="nav-profile" class="btn-group">
+        <button type="button" class="btn btn-link dropdown-toggle caret-off"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {% if object.photo %}
+            <img src="{{ object.photo.url }}" alt="{% trans 'photo profile' %}" class="img-thumbnail rounded-circle">
+          {% else %}
+            <img src="{% static 'site/images/no-user-image.gif' %}" alt="{% trans 'no image' %}" class="img-thumbnail rounded-circle">
+          {% endif %}
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-right">
+          {% if user.is_authenticated %}
+          <li>
+            {#<a href="{% url 'customprofile:owner' %}" class="transition">{% trans "Profile" %}</a>#}
+            <a href="#" class="transition">{% trans "Profile" %}</a>
+          </li>
+          {% else %}
+          <li>
+            {#<a href="{% url 'login' %}" class="transition">{% trans "Sign in" %}</a>#}
+            <a href="#" class="transition">{% trans "Sign in" %}</a>
+          </li>
+          {% endif %}
+          <li class="dropdown-divider"></li>
+          {% if user.is_authenticated %}
+          <li>
+            {#<a href="{% url 'logout' %}" class="transition">{% trans "Logout" %}</a>#}
+            <a href="#" class="transition">{% trans "Logout" %}</a>
+          </li>
+          {% else %}
+          <li>
+            {#<a href="{% url 'signup' %}" class="transition">{% trans "Sign up" %}</a>#}
+            <a href="#" class="transition">{% trans "Sign up" %}</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+</nav>

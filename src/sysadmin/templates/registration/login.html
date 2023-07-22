@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Login" %}{% endblock title %}
+
+{% block content %}
+    <div class="col-xl-6">
+        <div class="card">
+            <h4 class="card-header">{% trans "Login" %}</h4>
+            <div class="card-body">
+                <h5 class="card-title">{% trans "Login in your account" %}</h5>
+                {% include 'misc/includes/error_messages.html' %}
+                {% crispy form helper %}
+                <p class="card-text mt-3">
+                    {% trans "Sign in to your account using your username and password" %}
+                </p>
+                <p class="card-text mt-3">
+                    {% trans "You can register if you don't have an account yet" %}:
+                    <a href="{% url 'signup' %}" class="card-link text-primary font-weight-bold">
+                        {% trans "sign up" %}
+                    </a>
+                </p>
+                <p class="card-text mt-3">
+                    {% trans "You can reset your password if you do not remember it" %}:
+                    <a href="{% url 'password_reset' %}" class="card-link text-primary font-weight-bold">
+                        {% trans "reset password" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
