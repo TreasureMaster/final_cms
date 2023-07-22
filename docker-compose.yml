@@ -2,60 +2,38 @@ version: '3.7'
 
 services:
   nginx:
-    image: nginx:latest
+    build:
+      context: ./src/sysadmin
+      dockerfile: Dockerfile.nginx
     restart: always
     ports:
       - 80:80
     volumes:
-      - ./auction-project/config/nginx:/etc/nginx/conf.d
-      - static_volume:/home/auction/static
-      - media_volume:/home/auction/media
+      - static_volume:/app/config/static
     depends_on:
-      - web
+      - backend
     networks:
-      - auction-network
+      - sysadmin-network
 
-  web:
+  backend:
     build:
-      context: .
+      context: ./src/sysadmin
       args:
-        PIP_REQUIREMENTS: ${PIP_REQUIREMENTS}
-        WORK_DIR: ${WORK_DIR}
-    command: bash -c "commands/web_start.sh"
-    restart: always
-    depends_on:
-      - db
+        - PROJECT_ENVIRONMENT_TYPE=${PROJECT_ENVIRONMENT_TYPE}
+    hostname: backend
+    entrypoint: ./entrypoints/entrypoint.sh
+    # restart: always
     volumes:
-      - static_volume:/home/auction/static
-      - media_volume:/home/auction/media
-    expose:
-      - 8000
+      - static_volume:/app/config/static
     env_file:
-      - env/.env_django
-      - env/.env_db
-      - env/.env_superuser
+      - ./src/sysadmin/project.env/.env
     environment:
-      - WORK_DIR=${WORK_DIR}
+      - DJANGO_SETTINGS_MODULE=config.settings.${PROJECT_ENVIRONMENT_TYPE}
     networks:
-      - auction-network
-
-  db:
-    image: bitnami/postgresql:14
-    restart: always
-    env_file:
-      - env/.env_db
-    ports:
-      - 5432
-    volumes:
-      # - postgres_data:/var/lib/postgresql/data/
-      - postgres_data:/bitnami/postgresql
-    networks:
-      - auction-network
+      - sysadmin-network
 
 volumes:
-  postgres_data:
   static_volume:
-  media_volume:
 
 networks:
-  auction-network:
+  sysadmin-network:

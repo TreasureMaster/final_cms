@@ -137,7 +137,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR.parent / 'site_static',
 ]
@@ -154,5 +154,3 @@ EMAIL_HOST_USER = 'am5x86p75@list.ru'
 EMAIL_HOST_PASSWORD = 'loZ41QRU6zMeo9p3nHev'
 # EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
-
-# send_mail('Django mail', 'This e-mail was sent with Django.', 'am5x86p75@list.ru', ['am5x86p75@list.ru'], fail_silently=False)

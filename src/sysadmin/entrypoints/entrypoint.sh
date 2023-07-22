@@ -30,13 +30,13 @@ set -e
 python3 manage.py migrate
 python3 manage.py collectstatic --noinput
 
-if [ $DJANGO_SUPERUSER_USERNAME ]
-then
-    python3 manage.py createsuperuser \
-    --noinput \
-    --username $DJANGO_SUPERUSER_USERNAME \
-    --email $DJANGO_SUPERUSER_EMAIL
-fi
+# if [ $DJANGO_SUPERUSER_USERNAME ]
+# then
+#     python3 manage.py createsuperuser \
+#     --noinput \
+#     --username $DJANGO_SUPERUSER_USERNAME \
+#     --email $DJANGO_SUPERUSER_EMAIL
+# fi
 
 # supervisord
 # gunicorn --workers 3 --bind 0.0.0.0:8000 config.wsgi:application
