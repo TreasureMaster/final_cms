@@ -10,6 +10,7 @@ services:
       - 80:80
     volumes:
       - static_volume:/app/config/static
+      - /var/log/nginx:/var/log/nginx
     depends_on:
       - backend
     networks:
