@@ -1,23 +1,24 @@
 version: '3.7'
 
 services:
-  nginx:
-    build:
-      context: ./src/sysadmin
-      dockerfile: Dockerfile.nginx
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - static_volume:/app/config/static
-      - /var/log/nginx:/var/log/nginx
-      - ./entrypoints/certbot/www:/var/www/certbot/:ro
-      - ./entrypoints/certbot/conf/:/etc/nginx/ssl/:ro
-    depends_on:
-      - backend
-    networks:
-      - sysadmin-network
+  # nginx:
+  #   build:
+  #     context: ./src/sysadmin
+  #     dockerfile: Dockerfile.nginx
+  #   restart: always
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   volumes:
+  #     - static_volume:/app/config/static
+  #     - /var/log/nginx:/var/log/nginx
+  #     - ./entrypoints/certbot/www:/var/www/certbot/:ro
+  #     - ./entrypoints/certbot/conf/:/etc/nginx/ssl/:ro
+  #   # depends_on:
+  #   #   - certbot
+  #     # - backend
+  #   networks:
+  #     - sysadmin-network
 
   backend:
     build:
@@ -26,26 +27,33 @@ services:
         - PROJECT_ENVIRONMENT_TYPE=${PROJECT_ENVIRONMENT_TYPE}
     hostname: backend
     entrypoint: ./entrypoints/entrypoint.sh
-    # restart: always
+    restart: always
+    ports:
+      - 8000:8000
     volumes:
-      - static_volume:/app/config/static
+      - /var/www/sysadmin/static:/app/config/static
     env_file:
       - ./src/sysadmin/project.env/.env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.${PROJECT_ENVIRONMENT_TYPE}
-    networks:
-      - sysadmin-network
+    # depends_on:
+    #   - certbot
+    # networks:
+    #   - sysadmin-network
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./entrypoints/certbot/www/:/var/www/certbot/:rw
-      - ./entrypoints/certbot/conf/:/etc/letsencrypt/:rw
-    networks:
-      - sysadmin-network
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   volumes:
+  #     - ./entrypoints/certbot/www/:/var/www/certbot/:rw
+  #     - ./entrypoints/certbot/conf/:/etc/letsencrypt/:rw
+  #   command: certonly --webroot -w /var/www/certbot --force-renewal --email am5x86p75@list.ru -d 158.160.69.65.nip.io --agree-tos
+  #   depends_on:
+  #     - nginx
+  #   networks:
+  #     - sysadmin-network
 
 volumes:
   static_volume:
 
-networks:
-  sysadmin-network:
+# networks:
+#   sysadmin-network:
