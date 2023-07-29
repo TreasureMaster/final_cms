@@ -38,7 +38,7 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
 
 class SendForm(forms.Form):
     name = forms.CharField(label='Ваше имя', max_length=100, required=False)
-    email = forms.EmailField(label='Е-мэйл для отправки сообщения')
+    email = forms.EmailField(label='Email для отправки сообщения')
     subject = forms.CharField(label='Тема сообщения', max_length=50)
     text = forms.CharField(label='Ваше сообщение', widget=forms.Textarea)
 

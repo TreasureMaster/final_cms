@@ -89,9 +89,9 @@ class SenderFormHelper(FormHelper):
         self.form_method = 'POST'
         # self.form_show_errors = False
         self.layout = layout.Layout(
-            layout.Field('name', css_class='w-50'),
-            layout.Field('email', css_class='w-50'),
-            layout.Field('subject', css_class='w-50'),
-            layout.Field('text', css_class='w-50'),
+            layout.Field('name', css_class='w-100'),
+            layout.Field('email', css_class='w-100'),
+            layout.Field('subject', css_class='w-100'),
+            layout.Field('text', css_class='w-100'),
             bootstrap.FormActions(layout.Submit('register', _('Отправить'))),
         )
