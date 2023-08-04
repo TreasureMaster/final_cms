@@ -292,3 +292,4 @@ __pycache__/
 # My files
 *.ps1
 **/entrypoints/certbot/
+tmp/
