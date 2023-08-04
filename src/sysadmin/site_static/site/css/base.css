@@ -22,7 +22,9 @@ body {
 #for-testing p {
   font-size: 2em;
 }
+
 /* Навигационная панель */
+
 nav.navbar {
   /* background-color: #fff; */
   /* border: none; */
@@ -31,9 +33,11 @@ nav.navbar {
 nav.navbar a.navbar-brand {
   padding-top: 0;
 }
+/* Цвет левого угла */
 nav .top-left-menu {
   /* background-color: #252830; */
-  background-color: #2f4f4f;
+  /* background-color: #2f4f4f; */
+  background-color: #5f9ea0;
   padding: 0.9em;
 }
 .navbar-brand {

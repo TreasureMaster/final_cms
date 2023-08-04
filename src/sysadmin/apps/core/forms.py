@@ -37,10 +37,10 @@ class EmailValidationOnForgotPassword(PasswordResetForm):
 
 
 class SendForm(forms.Form):
-    name = forms.CharField(label='Ваше имя', max_length=100, required=False)
-    email = forms.EmailField(label='Email для отправки сообщения')
-    subject = forms.CharField(label='Тема сообщения', max_length=50)
-    text = forms.CharField(label='Ваше сообщение', widget=forms.Textarea)
+    name = forms.CharField(label='Введите ваше имя (опционально)', max_length=100, required=False)
+    email = forms.EmailField(label='Укажите email для отправки сообщения')
+    subject = forms.CharField(label='Укажите тему сообщения', max_length=50)
+    text = forms.CharField(label='Напишите ваше сообщение', widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
         # сохранение запроса HttpRequest внутри формы
