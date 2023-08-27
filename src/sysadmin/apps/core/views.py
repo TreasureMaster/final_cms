@@ -46,7 +46,7 @@ def message_send(request):
             send_mail(
                 request.POST['subject'],
                 request.POST['text'],
-                'Алексей админ <am5x86p75@list.ru>',
+                'Администратор <am5x86p75@list.ru>',
                 # ['am5x86p75@list.ru'],
                 [request.POST['email']],
                 # fail_silently=False
