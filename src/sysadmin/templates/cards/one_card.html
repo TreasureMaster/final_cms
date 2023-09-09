@@ -4,17 +4,17 @@
 <div class="col-xl-12">
     <div class="card">
       <!-- <h4 class="card-header">Главная страница сайта заказчика</h4> -->
-      <h4 class="card-header">Сервис заказчика</h4>
+      <h4 class="card-header">Базовый сервис заказчика с формой обратной связи</h4>
       <div class="card-body text-center">
-        <img class="card-img-top w-75 mx-auto mt-3 img-fluid" src="{% static 'site/images/7777.jpg' %}">
+        <img class="card-img-top w-75 mx-auto mt-3 img-fluid" src="{% static 'site/images/1117.jpg' %}">
       </div>
       <div class="card-body">
         <p class="card-text">
-          Главная страница сервиса заказчика включает в себя:
+          Главная страница сервиса заказчика состоит из:
         </p>
         <ol>
-          <li>нейтральная картинка</li>
-          <li>форма обратной связи</li>
+          <li>нейтральной картинки</li>
+          <li>формы обратной связи</li>
         </ol>
         <p>
           Нужно настроить любую CMS, которая вам понравится (хоть тот же WordPress), и установите её на свой сервер с nginx.
@@ -22,7 +22,7 @@
         <!-- <p class="card-text">
           Внимание! Регистрация и авторизация на сервисе заказчика отключена (не требуется по ТЗ).
         </p> -->
-        <h5 class="card-title">Отправка обратной связи</h5>
+        <h5 class="card-title">Здесь можно отправить обратную связь</h5>
         {% if messages %}
         <ul class="list-group mb-3">
           {% for message in messages %}

@@ -7,11 +7,11 @@
           <img src="{{ user.profile.photo.url }}" alt="photo thumbnail" class="rounded-circle">
         {% else %}
           <!-- <img src="{% static 'site/images/no-user-image.gif' %}" alt="no image" class="rounded-circle"> -->
-          <img src="{% static 'site/images/admin.jpg' %}" alt="no image" class="rounded-circle">
+          <img src="{% static 'site/images/admin_13.png' %}" alt="no image" class="rounded-circle">
         {% endif %}
         <h4 class="profile-title ml-2">
           {#{% if user.is_authenticated %}{{ user.username }}{% else %}{% trans "Anonymous User" %}{% endif %}#}
-          {% if user.is_authenticated %}{{ user.username }}{% else %}{% trans "Воробьев Роман" %}{% endif %}
+          {% if user.is_authenticated %}{{ user.username }}{% else %}{% trans "Овчинникова Галина Павловна" %}{% endif %}
           <small>{% if user.is_authenticated %}{{ user.email }}{% endif %}</small>
         </h4>
       </div>
