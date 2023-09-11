@@ -28,6 +28,9 @@ urlpatterns = [
     #     name='password_reset'
     # ),
     # path('', views.index, name='index'),
-    path('', views.message_send, name='index'),
+    # NOTE первый вариант
+    # path('', views.message_send, name='index'),
+    # NOTE второй вариант
+    path('', views.message_send2, name='index2'),
     # path('', include('django.contrib.auth.urls')),
 ]

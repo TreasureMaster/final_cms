@@ -47,3 +47,10 @@ class SendForm(forms.Form):
         # self.request = request
         super().__init__(*args, **kwargs)
         self.helper = SenderFormHelper()
+
+
+# class SendForm2(forms.Form):
+#     name = forms.CharField(max_length=100, required=False)
+#     email = forms.EmailField()
+#     subject = forms.CharField(max_length=50)
+#     text = forms.CharField()

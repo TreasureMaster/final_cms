@@ -58,3 +58,26 @@ def message_send(request):
         form = SendForm()
 
     return render(request, 'base.html', {'form': form, 'cards': [1]})
+
+
+def message_send2(request):
+    if request.method == 'POST':
+        form = SendForm(request.POST)
+        if form.is_valid():
+            # Отправить письмо
+            form = SendForm()
+            messages.success(request, 'Ваше сообщение успешно отправлено!')
+            send_mail(
+                request.POST['subject'],
+                request.POST['text'],
+                'Администратор <am5x86p75@list.ru>',
+                # ['am5x86p75@list.ru'],
+                [request.POST['email']],
+            )
+        else:
+            messages.error(request, 'Ошибка во введенных данных')
+
+    else:
+        form = SendForm()
+
+    return render(request, 'contact2.html', {'form': form, 'cards': [1]})
