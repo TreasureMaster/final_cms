@@ -30,7 +30,7 @@ header a, header li {
 }
 
 section#intro-header {
-    background-image: url(../images/landscape.jpg);
+    background-image: url(../images/sysadmin_1.jpg);
     background-size: cover;
 }
 
@@ -49,8 +49,9 @@ section#intro-header h2 {
     font-size: 1.5rem;
 }
 
+/* Длина подчеркивания названия компании */
 section#intro-header hr {
-    width: 25%;
+    width: 43%;
     border-top-color: rgba(255, 255, 255, 1);
 }
 
